@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if portfolio %}
+        <h6>To get the report of the portfolio on your mail,
+            <a href="{% url 'portfolio.request_mail' %}">Click here!</a></h6>
+        <div>
+            {% for stock in portfolio %}
+            <div>
+              <div class="p-3 border">
+                <a href="{% url 'portfolio.edit' pk=stock.id %}" class="text-dark text-decoration-non">
+                  <h3>
+                    {{stock.stock_name}}
+                  </h3>
+                </a>
+                  <table style="width: 100%">
+                      <tr>
+                          <th>Purchased Amount</th>
+                          <th>Current Value</th>
+                          <th>Quantity</th>
+                          <th>Unrealised Profit/Loss</th>
+                      </tr>
+                      <tr>
+                          <td>₹{{stock.purchased_price| truncatechars:10}}</td>
+                          <td>₹{{ stock.get_current_price }}</td>
+                          <td>{{ stock.quantity }}</td>
+                          {% if stock.profit_loss < "0" %}
+                              <td style="color: red; font-weight: bold" >₹{{ stock.profit_loss }}</td>
+                          {% else %}
+                              <td style="color: green; font-weight: bold">₹{{ stock.profit_loss }}</td>
+                          {% endif %}
+                      </tr>
+                  <br/>
+                      <tr>
+                          <th colspan="2">Total Unrealised Profit/Loss </th>
+                          <th>Holding (%)</th>
+                          <th rowspan="2">
+                                  <a href="{% url 'portfolio.delete' pk=stock.id %}" class="btn btn-danger">Delete</a>
+                          </th>
+                      </tr>
+                      <tr>
+                          {% if stock.profit_loss < "0" %}
+                              <td style="color: red; font-weight: bold" colspan="2">₹{{ stock.total_profit_loss }}</td>
+                          {% else %}
+                              <td style="color: green; font-weight: bold" colspan="2">₹{{ stock.total_profit_loss }}</td>
+                          {% endif %}
+                          <td>{{ stock.quantityPercentage }}</td>
+                      </tr>
+                  </table>
+              </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% for stock in portfolio|slice:":1" %}
+            {% if stock.pie_chart %}
+                <img src="data:image/png;base64, {{ stock.pie_chart|safe }}" alt="">
+            {% endif %}
+            {% if stock.bar_chart %}
+                <img src="data:image/png;base64, {{ stock.bar_chart|safe }}" alt="">
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <h4>There are no stocks added in your portfolio.</h4>
+        <h4>
+            <a href="{% url 'portfolio.add' %}">Click here</a> to add your first stock.
+        </h4>
+        <br><br><br><br>
+        <h4>Quote of the day!</h4>
+        <h4>“When I wrote this code, only God and I understood what I did. Now only God knows.”</h4>
+    {% endif %}
+{% endblock %}

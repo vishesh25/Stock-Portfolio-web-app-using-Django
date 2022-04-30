@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="post" style="text-align: left; margin: 0 auto; width: 600px"> {% csrf_token %}
+    <table style="width: 100%">
+        <tr>
+            <td style="width: 30%"><label for="id_first_name">First name:</label></td>
+            <td>
+                <input type="text" name="first_name" maxlength="150" id="id_first_name"
+                       class="form-control" placeholder="First name">
+            </td>
+        </tr>
+        <tr>
+            <td><label for="id_last_name">Last name:</label></td>
+            <td>
+                <input type="text" name="last_name" maxlength="150" id="id_last_name"
+                       class="form-control" placeholder="Last name">
+            </td>
+        </tr>
+        <tr>
+            <td><label for="id_email">Email address:</label></td>
+            <td>
+                <input type="email" name="email" maxlength="254" id="id_email"
+                       class="form-control" placeholder="E-mail address">
+            </td>
+        </tr>
+        <tr>
+            <td><label for="id_username">Username:</label></td>
+            <td>
+                <input type="text" name="username" maxlength="150" autofocus="" required="" id="id_username"
+                       class="form-control" placeholder="Username">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <span class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="id_password1">Password:</label></td>
+            <td>
+                <input type="password" name="password1" autocomplete="new-password" required="" id="id_password1"
+                       class="form-control" placeholder="Password">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <span class="helptext">
+                    <ul>
+                        <li>Your password can’t be too similar to your other personal information.</li>
+                        <li>Your password must contain at least 8 characters.</li>
+                        <li>Your password can’t be a commonly used password.</li>
+                        <li>Your password can’t be entirely numeric.</li>
+                    </ul>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="id_password2">Password confirmation:</label></td>
+            <td>
+                <input type="password" name="password2" autocomplete="new-password" required="" id="id_password2"
+                       class="form-control" placeholder="Re-enter password">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><span class="helptext">Enter the same password as before, for verification.</span></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center"><input type="submit" name="Submit"></td>
+        </tr>
+    </table>
+
+</form>
+
+{% endblock %}

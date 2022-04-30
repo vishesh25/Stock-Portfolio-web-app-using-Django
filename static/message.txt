@@ -1,0 +1,9 @@
+Hi ${PERSON_NAME},
+
+Please find attached your stock report generated on ${DATE_TIME}.
+Have a good day :)
+
+Note: This is auto-generated mail. Don't reply to this mail.
+
+Regards,
+Vishesh Shah

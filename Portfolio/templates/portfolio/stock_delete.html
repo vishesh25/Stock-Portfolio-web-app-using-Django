@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form method="post"> {% csrf_token %}
+    <p>Are you sure you want to remove {{stocks.stock_name.upper}} from your portfolio?</p>
+    <p>This action can't be undone!</p>
+    <a href="{% url 'portfolio.view' %}" class="btn btn-secondary">Back</a>
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>
+
+{% endblock %}

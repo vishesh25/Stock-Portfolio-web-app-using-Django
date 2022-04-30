@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if purchase %}
+        <div class="p-3 border">
+            <a href="{% url 'portfolio.view' %}" class="text-dark text-decoration-non">
+                <h3>Total</h3>
+            </a>
+            <table style="width: 100%">
+              <tr>
+                  <th>Purchased Amount</th>
+                  <th>Current Value</th>
+                  <th>Unrealised Gain/Loss</th>
+              </tr>
+              <tr>
+                  <td>{{ purchase }}</td>
+                  <td>{{ current }}</td>
+                  {% if net < "0" %}
+                      <td style="color: red; font-weight: bold">₹{{ net }}</td>
+                  {% else %}
+                      <td style="color: green; font-weight: bold">₹{{ net }}</td>
+                  {% endif %}
+              </tr>
+            </table>
+        </div>
+        <img src="data:image/png;base64, {{ bar|safe }}" alt="">
+    {% else %}
+        <h4>Rule no. 1: Never lose money. Rule no. 2: Never forget rule number 1.</h4>
+        <h4>-Warren Buffett </h4>
+        <br><br><br><br><br>
+        <h4>Start adding your investments now!</h4>
+    {% endif %}
+
+{% endblock %}
